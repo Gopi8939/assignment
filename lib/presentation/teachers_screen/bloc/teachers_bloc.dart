@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:assignment/core/utils/api_service.dart';
@@ -5,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/Appconstant.dart';
 import '../models/teachers_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/core/app_export.dart';
 part 'teachers_event.dart';
 part 'teachers_state.dart';
@@ -53,6 +55,10 @@ class TeachersBloc extends Bloc<TeachersEvent, TeachersState> {
       );
 
       if (response.statusCode == 200) {
+        var result = json.decode(await response.stream.bytesToString());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool('isAuthenticated', true);
+        prefs.setInt('uid', result['uid']);
         Appconstant().toast(toast: "Logged in Successfully", clr: Colors.green);
         NavigatorService.popAndPushNamed(
           AppRoutes.recommendationScreen,

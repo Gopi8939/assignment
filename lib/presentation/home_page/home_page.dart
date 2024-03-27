@@ -1,6 +1,7 @@
 import 'package:assignment/core/utils/size_utils.dart';
 import 'package:assignment/localization/app_localization.dart';
 import 'package:assignment/theme/theme_helper.dart';
+import 'package:assignment/widgets/custom_elevated_button.dart';
 
 import '../../core/app_export.dart';
 import '../../core/utils/image_constant.dart';
@@ -9,6 +10,8 @@ import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../widgets/custom_image_view.dart';
 import 'models/home_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:flutter/material.dart';
 import 'bloc/home_bloc.dart';
 
@@ -35,6 +38,20 @@ class HomePage extends StatelessWidget {
             child: Column(children: [
               SizedBox(height: 37.v),
               _buildSixtyOne(context),
+              SizedBox(height: 70.v),
+              CustomElevatedButton(
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.setBool('isAuthenticated', false);
+                    NavigatorService.pushNamed(
+                      AppRoutes.registerationScreen,
+                    );
+                  },
+                  height: 42.v,
+                  text: "Logout",
+                  margin: EdgeInsets.only(left: 38.h, right: 19.h),
+                  buttonTextStyle: theme.textTheme.titleLarge!),
               SizedBox(height: 70.v),
               Padding(
                   padding: EdgeInsets.only(left: 23.h, right: 60.h),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:assignment/presentation/organization_screen/models/organization_model.dart';
@@ -5,6 +6,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../../core/utils/api_service.dart';
 import '../../../widgets/Appconstant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '/core/app_export.dart';
 part 'organization_event.dart';
 part 'organization_state.dart';
@@ -45,6 +48,11 @@ class OrganizationBloc extends Bloc<OrganizationEvent, OrganizationState> {
           event.profilePic);
 
       if (response.statusCode == 200) {
+        var result = json.decode(await response.stream.bytesToString());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool('isAuthenticated', true);
+        prefs.setInt('uid', result['uid']);
+
         Appconstant().toast(toast: "Logged in Successfully", clr: Colors.green);
         NavigatorService.popAndPushNamed(
           AppRoutes.recommendationScreen,
@@ -58,5 +66,4 @@ class OrganizationBloc extends Bloc<OrganizationEvent, OrganizationState> {
       Appconstant().toast(toast: "Failed to Register");
     }
   }
-
 }

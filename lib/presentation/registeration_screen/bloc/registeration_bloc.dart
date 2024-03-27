@@ -26,13 +26,13 @@ class RegisterationBloc extends Bloc<RegisterationEvent, RegisterationState> {
     emit(state.copyWith(
         emailController: TextEditingController(),
         passwordController: TextEditingController()));
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // bool isAuthenticated = prefs.getBool('isAuthenticated') ?? false;
-    // isAuthenticated
-    //     ? NavigatorService.popAndPushNamed(
-    //         AppRoutes.homeContainerScreen,
-    //       )
-    //     : null;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isAuthenticated = prefs.getBool('isAuthenticated') ?? false;
+    isAuthenticated
+        ? NavigatorService.popAndPushNamed(
+            AppRoutes.homeContainerScreen,
+          )
+        : null;
   }
 
   _onSignInButtonClicked(
@@ -43,7 +43,6 @@ class RegisterationBloc extends Bloc<RegisterationEvent, RegisterationState> {
 
       if (response.statusCode == 200) {
         var result = json.decode(await response.stream.bytesToString());
-        // log(result['uid'].toString());
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('isAuthenticated', true);
         prefs.setInt('uid', result['uid']);
