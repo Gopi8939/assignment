@@ -110,7 +110,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-
   Widget _buildFifty(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
@@ -165,7 +164,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-
   Widget _buildFiftyThree(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
@@ -187,7 +185,6 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildThirtySix(BuildContext context) {
     return Padding(
@@ -225,7 +222,6 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildTen(BuildContext context) {
     return Container(
@@ -309,7 +305,6 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildThirtyThree(BuildContext context) {
     return Column(

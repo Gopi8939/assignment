@@ -64,4 +64,110 @@ class ApiService {
       throw Exception('Failed to Register in: $e');
     }
   }
+
+  static Future<http.StreamedResponse> teacherRegister(
+    String username,
+    String password,
+    String mobile,
+    String name,
+    String cOLLEGE,
+    String department,
+    String achievements,
+    String qualification,
+    String experience,
+  ) async {
+    try {
+      var request = http.MultipartRequest(
+          'POST', Uri.parse('${baseUrl}register/teacher'));
+      request.fields.addAll({
+        "username": username,
+        "password": password,
+        "mobile": mobile,
+        "name": name,
+        'college': cOLLEGE,
+        'department': department,
+        'field': "",
+        'qualifications': qualification,
+        'post': "",
+        'achievements': achievements,
+        'experience': experience,
+        'profile_pic': ""
+      });
+
+      http.StreamedResponse response = await request.send();
+      return response;
+    } catch (e) {
+      // Handle exceptions here
+      log(e.toString());
+      throw Exception('Failed to Register in: $e');
+    }
+  }
+
+  static Future<http.StreamedResponse> organizationRegister(
+    String username,
+    String password,
+    String mobile,
+    String cOLLEGE,
+    String city,
+    String orgEmail,
+    String profilepic,
+  ) async {
+    try {
+      var request = http.MultipartRequest(
+          'POST', Uri.parse('${baseUrl}register/organization'));
+      request.fields.addAll({
+        "username": username,
+        "password": password,
+        "mobile": mobile,
+        'college': cOLLEGE,
+        'city': city,
+        'org_email': orgEmail,
+        'profile_pic': profilepic
+      });
+
+      http.StreamedResponse response = await request.send();
+      return response;
+    } catch (e) {
+      // Handle exceptions here
+      log(e.toString());
+      throw Exception('Failed to Register in: $e');
+    }
+  }
+
+  static Future<http.StreamedResponse> getRecommendedUser() async {
+    try {
+      var headers = {'Accept': 'application/ecmascript'};
+      var request = http.MultipartRequest(
+          'GET', Uri.parse('${baseUrl}user/recommendation?userId=4'));
+      request.fields.addAll({'userId': '4'});
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+      return response;
+    } catch (e) {
+      // Handle exceptions here
+      log(e.toString());
+      throw Exception('Failed to Get Recommended user $e');
+    }
+  }
+
+  static Future<http.StreamedResponse> sendFllowRequest(
+      int userId, int followerId) async {
+    try {
+      var request =
+          http.MultipartRequest('POST', Uri.parse('${baseUrl}user/follow'));
+      request.fields.addAll({
+        'followerId': userId.toString(),
+        'followingId': followerId.toString(),
+      });
+
+      http.StreamedResponse response = await request.send();
+      return response;
+    } catch (e) {
+      // Handle exceptions here
+      log(e.toString());
+      throw Exception('Failed to sign in: $e');
+    }
+  }
 }

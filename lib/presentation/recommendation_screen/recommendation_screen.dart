@@ -29,25 +29,24 @@ class RecommendationScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             body: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Container(
-                  width: double.maxFinite,
-                  padding: EdgeInsets.symmetric(horizontal: 43.h, vertical: 56.v),
-                  child: Column(children: [
-                    SizedBox(height: 11.v),
-                    Text("lbl_recommendation".tr,
-                        style: theme.textTheme.headlineSmall),
-                    SizedBox(height: 74.v),
-                    _buildRECOMMENDATION(context),
-                    SizedBox(height: 38.v),
-                    CustomImageView(
-                        imagePath: ImageConstant.imgNext,
-                        height: 60.v,
-                        onTap: () {
-                          onTapImgNext(context);
-                        })
-                  ])),
-            )));
+      scrollDirection: Axis.vertical,
+      child: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(horizontal: 43.h, vertical: 56.v),
+          child: Column(children: [
+            SizedBox(height: 11.v),
+            Text("lbl_recommendation".tr, style: theme.textTheme.headlineSmall),
+            SizedBox(height: 74.v),
+            _buildRECOMMENDATION(context),
+            SizedBox(height: 38.v),
+            CustomImageView(
+                imagePath: ImageConstant.imgNext,
+                height: 60.v,
+                onTap: () {
+                  onTapImgNext(context);
+                })
+          ])),
+    )));
   }
 
   /// Section Widget
@@ -80,7 +79,7 @@ class RecommendationScreen extends StatelessWidget {
 
   /// Navigates to the homeContainerScreen when the action is triggered.
   onTapImgNext(BuildContext context) {
-    NavigatorService.pushNamed(
+    NavigatorService.popAndPushNamed(
       AppRoutes.homeContainerScreen,
     );
   }

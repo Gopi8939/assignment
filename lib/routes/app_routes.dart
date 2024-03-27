@@ -42,7 +42,7 @@ class AppRoutes {
   static const String initialRoute = '/initialRoute';
 
   static Map<String, WidgetBuilder> get routes => {
-        initialRoute: RegisterationScreen.builder,
+        initialRoute: RecommendationScreen.builder,
         registerationScreen: RegisterationScreen.builder,
         roleScreen: RoleScreen.builder,
         studentsScreen: StudentsScreen.builder,

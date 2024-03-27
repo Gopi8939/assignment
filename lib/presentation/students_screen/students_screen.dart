@@ -120,14 +120,7 @@ class StudentsScreen extends StatelessWidget {
                                   margin:
                                       EdgeInsets.only(left: 38.h, right: 19.h),
                                   buttonTextStyle: theme.textTheme.titleLarge!),
-                              // CustomIconButton(
-                              //     height: 75.v,
-                              //     width: 80.h,
-                              //     onTap: () {
-                              //       onTapBtnNext(context);
-                              //     },
-                              //     child: CustomImageView(
-                              //         imagePath: ImageConstant.imgNext)),
+                           
                               SizedBox(height: 5.v)
                             ])))))));
   }

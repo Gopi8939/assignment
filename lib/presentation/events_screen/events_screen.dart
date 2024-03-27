@@ -27,53 +27,52 @@ class EventsScreen extends StatelessWidget {
       return SafeArea(
           child: Scaffold(
               body: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Container(
-                    width: double.maxFinite,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 43.h, vertical: 49.v),
-                    child: Column(children: [
-                      Container(
-                          height: 121.v,
-                          width: 274.h,
-                          padding: EdgeInsets.symmetric(vertical: 33.v),
-                          decoration: AppDecoration.fillPrimary,
-                          child: CustomImageView(
-                              imagePath: ImageConstant.imgImage,
-                              height: 55.v,
-                              alignment: Alignment.center)),
-                      SizedBox(height: 28.v),
-                      Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 76.h, vertical: 34.v),
-                          decoration: AppDecoration.fillPrimary,
-                          child: Column(children: [
-                            Divider(),
-                            SizedBox(height: 29.v),
-                            Divider(),
-                            SizedBox(height: 29.v),
-                            Divider(),
-                            SizedBox(height: 32.v)
-                          ])),
-                      SizedBox(height: 28.v),
-                      Container(
-                          height: 75.v,
-                          width: 274.h,
-                          padding: EdgeInsets.symmetric(vertical: 1.v),
-                          decoration: AppDecoration.fillPrimary,
-                          child: CustomImageView(
-                              imagePath: ImageConstant.imgImage,
-                              height: 55.v,
-                              alignment: Alignment.topCenter)),
-                      SizedBox(height: 62.v),
-                      CustomImageView(
-                          imagePath: ImageConstant.imgNext,
-                          height: 60.v,
-                          onTap: () {
-                            onTapImgNext(context);
-                          })
-                    ])),
-              )));
+        scrollDirection: Axis.vertical,
+        child: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(horizontal: 43.h, vertical: 49.v),
+            child: Column(children: [
+              Container(
+                  height: 121.v,
+                  width: 274.h,
+                  padding: EdgeInsets.symmetric(vertical: 33.v),
+                  decoration: AppDecoration.fillPrimary,
+                  child: CustomImageView(
+                      imagePath: ImageConstant.imgImage,
+                      height: 55.v,
+                      alignment: Alignment.center)),
+              SizedBox(height: 28.v),
+              Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 76.h, vertical: 34.v),
+                  decoration: AppDecoration.fillPrimary,
+                  child: Column(children: [
+                    Divider(),
+                    SizedBox(height: 29.v),
+                    Divider(),
+                    SizedBox(height: 29.v),
+                    Divider(),
+                    SizedBox(height: 32.v)
+                  ])),
+              SizedBox(height: 28.v),
+              Container(
+                  height: 75.v,
+                  width: 274.h,
+                  padding: EdgeInsets.symmetric(vertical: 1.v),
+                  decoration: AppDecoration.fillPrimary,
+                  child: CustomImageView(
+                      imagePath: ImageConstant.imgImage,
+                      height: 55.v,
+                      alignment: Alignment.topCenter)),
+              SizedBox(height: 62.v),
+              CustomImageView(
+                  imagePath: ImageConstant.imgNext,
+                  height: 60.v,
+                  onTap: () {
+                    onTapImgNext(context);
+                  })
+            ])),
+      )));
     });
   }
 

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:assignment/presentation/registeration_screen/models/registeration_model.dart';
@@ -7,6 +8,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../../core/utils/api_service.dart';
 import '../../../core/utils/navigator_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '/core/app_export.dart';
 part 'registeration_event.dart';
 part 'registeration_state.dart';
@@ -23,11 +26,13 @@ class RegisterationBloc extends Bloc<RegisterationEvent, RegisterationState> {
     emit(state.copyWith(
         emailController: TextEditingController(),
         passwordController: TextEditingController()));
-    Future.delayed(const Duration(milliseconds: 3000), () {
-      // NavigatorService.popAndPushNamed(
-      //   AppRoutes.roleScreen,
-      // );
-    });
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // bool isAuthenticated = prefs.getBool('isAuthenticated') ?? false;
+    // isAuthenticated
+    //     ? NavigatorService.popAndPushNamed(
+    //         AppRoutes.homeContainerScreen,
+    //       )
+    //     : null;
   }
 
   _onSignInButtonClicked(
@@ -37,16 +42,23 @@ class RegisterationBloc extends Bloc<RegisterationEvent, RegisterationState> {
       final response = await ApiService.signIn(event.email, event.password);
 
       if (response.statusCode == 200) {
+        var result = json.decode(await response.stream.bytesToString());
+        // log(result['uid'].toString());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool('isAuthenticated', true);
+        prefs.setInt('uid', result['uid']);
+
         Appconstant().toast(toast: "Logged in Successfully", clr: Colors.green);
         NavigatorService.popAndPushNamed(
-          AppRoutes.recommendationScreen,
+          AppRoutes.homeContainerScreen,
         );
       } else {
-        log(await response.stream.bytesToString());
-        log(response.statusCode.toString());
-        Appconstant().toast(toast: "Failed to sign in");
+        var result = json.decode(await response.stream.bytesToString());
+        log(result['error']);
+        Appconstant().toast(toast: result['error']);
       }
     } catch (e) {
+      log(e.toString());
       Appconstant().toast(toast: "Failed to sign in");
     }
   }

@@ -2,41 +2,58 @@
 
 part of 'organization_bloc.dart';
 
-/// Represents the state of Organization in the application.
 class OrganizationState extends Equatable {
   OrganizationState({
-    this.nameController,
-    this.locationController,
-    this.priceController,
+    this.collegeNameController,
+    this.mobileController,
+    this.cityController,
+    this.orgEmailController,
+    this.profilePicController,
+    this.usernameController,
+    this.passwordController,
     this.organizationModelObj,
   });
 
-  TextEditingController? nameController;
-
-  TextEditingController? locationController;
-
-  TextEditingController? priceController;
-
+  TextEditingController? collegeNameController;
+  TextEditingController? mobileController;
+  TextEditingController? cityController;
+  TextEditingController? orgEmailController;
+  TextEditingController? profilePicController;
+  TextEditingController? usernameController;
+  TextEditingController? passwordController;
   OrganizationModel? organizationModelObj;
 
   @override
   List<Object?> get props => [
-        nameController,
-        locationController,
-        priceController,
+        collegeNameController,
+        mobileController,
+        cityController,
+        orgEmailController,
+        profilePicController,
+        usernameController,
+        passwordController,
         organizationModelObj,
       ];
 
   OrganizationState copyWith({
-    TextEditingController? nameController,
-    TextEditingController? locationController,
-    TextEditingController? priceController,
+    TextEditingController? collegeNameController,
+    TextEditingController? mobileController,
+    TextEditingController? cityController,
+    TextEditingController? orgEmailController,
+    TextEditingController? profilePicController,
+    TextEditingController? usernameController,
+    TextEditingController? passwordController,
     OrganizationModel? organizationModelObj,
   }) {
     return OrganizationState(
-      nameController: nameController ?? this.nameController,
-      locationController: locationController ?? this.locationController,
-      priceController: priceController ?? this.priceController,
+      collegeNameController:
+          collegeNameController ?? this.collegeNameController,
+      mobileController: mobileController ?? this.mobileController,
+      cityController: cityController ?? this.cityController,
+      orgEmailController: orgEmailController ?? this.orgEmailController,
+      profilePicController: profilePicController ?? this.profilePicController,
+      usernameController: usernameController ?? this.usernameController,
+      passwordController: passwordController ?? this.passwordController,
       organizationModelObj: organizationModelObj ?? this.organizationModelObj,
     );
   }

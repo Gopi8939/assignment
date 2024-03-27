@@ -9,6 +9,7 @@ import '../../core/app_export.dart';
 import '../../core/utils/navigator_service.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
+import '../../widgets/custom_elevated_button.dart';
 import 'models/teachers_model.dart';
 import 'package:flutter/material.dart';
 import 'bloc/teachers_bloc.dart';
@@ -29,6 +30,8 @@ class TeachersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<TeachersBloc>(context);
+
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -49,61 +52,68 @@ class TeachersScreen extends StatelessWidget {
                                   Text("lbl_teachers".tr,
                                       style: theme.textTheme.bodyLarge),
                                   SizedBox(height: 32.v),
-                                  BlocSelector<TeachersBloc, TeachersState,
-                                          TextEditingController?>(
-                                      selector: (state) => state.nameController,
-                                      builder: (context, nameController) {
-                                        return CustomTextFormField(
-                                            controller: nameController,
-                                            hintText: "lbl_name".tr,
-                                            validator: (value) {
-                                              if (!isText(value)) {
-                                                return "err_msg_please_enter_valid_text"
-                                                    .tr;
-                                              }
-                                              return null;
-                                            });
-                                      }),
+                                  _buildUserName(context),
                                   SizedBox(height: 16.v),
-                                  Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text("lbl_college".tr,
-                                          style: theme.textTheme.bodyLarge)),
-                                  SizedBox(height: 15.v),
-                                  Divider(),
+                                  _buildPassword(context),
                                   SizedBox(height: 16.v),
-                                  Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text("lbl_department".tr,
-                                          style: theme.textTheme.bodyLarge)),
-                                  SizedBox(height: 15.v),
-                                  Divider(),
+                                  _buildMobile(context),
                                   SizedBox(height: 16.v),
-                                  BlocSelector<TeachersBloc, TeachersState,
-                                          TextEditingController?>(
-                                      selector: (state) =>
-                                          state.qUALIFICATIONSController,
-                                      builder:
-                                          (context, qUALIFICATIONSController) {
-                                        return CustomTextFormField(
-                                            controller:
-                                                qUALIFICATIONSController,
-                                            hintText: "lbl_qualifications".tr,
-                                            textInputAction:
-                                                TextInputAction.done);
-                                      }),
-                                  SizedBox(height: 52.v),
-                                  Divider(),
-                                  Spacer(),
+                                  _buildName(context),
+                                  SizedBox(height: 16.v),
+                                  _buildCOLLEGE(context),
+                                  SizedBox(height: 16.v),
+                                  _buildDepartment(context),
+                                  SizedBox(height: 16.v),
+                                  _buildAchievement(context),
+                                  SizedBox(height: 16.v),
+                                  _buildQualification(context),
+                                  SizedBox(height: 16.v),
+                                  _buildExperience(context),
                                   SizedBox(height: 25.v),
-                                  CustomImageView(
-                                      imagePath: ImageConstant.imgNext,
-                                      height: 75.v,
-                                      alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.only(left: 92.h),
-                                      onTap: () {
-                                        onTapImgNext(context);
-                                      })
+                                  CustomElevatedButton(
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          final username = bloc
+                                              .state.usernameController?.text;
+                                          final password = bloc
+                                              .state.passwordController?.text;
+                                          final mobile = bloc
+                                              .state.mobileNumController?.text;
+                                          final name =
+                                              bloc.state.nameController?.text;
+                                          final cOLLEGE = bloc
+                                              .state.collegeController?.text;
+                                          final department = bloc
+                                              .state.departmentController?.text;
+                                          final experience = bloc
+                                              .state.experienceController?.text;
+                                          final qualification = bloc.state
+                                              .qualificationsController?.text;
+                                          final achievements = bloc.state
+                                              .achievementsController?.text;
+
+                                          bloc.add(TeacherRegister(
+                                              username: username ?? "",
+                                              password: password ?? "",
+                                              name: name ?? "",
+                                              college: cOLLEGE ?? "",
+                                              department: department ?? "",
+                                              experience: experience ?? "",
+                                              achievements: achievements ?? "",
+                                              qualifications:
+                                                  qualification ?? "",
+                                              mobileNum: mobile ?? "",
+                                              field: '',
+                                              post: '',
+                                              profilePic: ''));
+                                        }
+                                      },
+                                      height: 42.v,
+                                      text: "Register",
+                                      margin: EdgeInsets.only(
+                                          left: 38.h, right: 19.h),
+                                      buttonTextStyle:
+                                          theme.textTheme.titleLarge!),
                                 ]))))))));
   }
 
@@ -112,5 +122,136 @@ class TeachersScreen extends StatelessWidget {
     NavigatorService.pushNamed(
       AppRoutes.organizationScreen,
     );
+  }
+
+  Widget _buildUserName(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.usernameController,
+        builder: (context, usernameController) {
+          return CustomTextFormField(
+              controller: usernameController,
+              hintText: "lbl_username".tr,
+              validator: (value) {
+                if (!isText(value)) {
+                  return "err_msg_please_enter_valid_text".tr;
+                }
+                return null;
+              },
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  /// Section Widget
+  Widget _buildPassword(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.passwordController,
+        builder: (context, passwordController) {
+          return CustomTextFormField(
+              controller: passwordController,
+              hintText: "lbl_password".tr,
+              validator: (value) {
+                // if (!isText(value)) {
+                //   return "err_msg_please_enter_valid_text".tr;
+                // }
+                return null;
+              },
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  Widget _buildMobile(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.mobileNumController,
+        builder: (context, mobileNumController) {
+          return CustomTextFormField(
+              controller: mobileNumController,
+              hintText: "MOBILE",
+              validator: (value) {
+                if (value == null) {
+                  return "mobile is required";
+                }
+                // if (isText(value)) {
+                //   return "err_msg_please_enter_valid_text".tr;
+                // }
+                // return null;
+              },
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  /// Section Widget
+  Widget _buildName(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.nameController,
+        builder: (context, nameController) {
+          return CustomTextFormField(
+              controller: nameController,
+              hintText: "lbl_name".tr,
+              validator: (value) {
+                if (!isText(value)) {
+                  return "err_msg_please_enter_valid_text".tr;
+                }
+                return null;
+              },
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  /// Section Widget
+  Widget _buildCOLLEGE(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.collegeController,
+        builder: (context, cOLLEGEController) {
+          return CustomTextFormField(
+              controller: cOLLEGEController,
+              hintText: "lbl_college".tr,
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  Widget _buildQualification(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.qualificationsController,
+        builder: (context, qualificationsController) {
+          return CustomTextFormField(
+              controller: qualificationsController,
+              hintText: "lbl_qualification".tr,
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  /// Section Widget
+  Widget _buildDepartment(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.departmentController,
+        builder: (context, departmentController) {
+          return CustomTextFormField(
+              controller: departmentController,
+              hintText: "lbl_department".tr,
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  Widget _buildAchievement(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.achievementsController,
+        builder: (context, achievementsController) {
+          return CustomTextFormField(
+              controller: achievementsController,
+              hintText: "lbl_achievement".tr,
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
+  }
+
+  /// Section Widget
+  Widget _buildExperience(BuildContext context) {
+    return BlocSelector<TeachersBloc, TeachersState, TextEditingController?>(
+        selector: (state) => state.experienceController,
+        builder: (context, experienceController) {
+          return CustomTextFormField(
+              controller: experienceController,
+              hintText: "lbl_experience".tr,
+              contentPadding: EdgeInsets.symmetric(horizontal: 21.h));
+        });
   }
 }

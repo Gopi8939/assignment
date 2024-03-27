@@ -1,4 +1,3 @@
-
 import '../../core/app_export.dart';
 import '../../routes/app_routes.dart';
 import '../../widgets/custom_bottom_bar.dart';

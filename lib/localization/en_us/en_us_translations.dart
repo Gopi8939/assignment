@@ -22,7 +22,11 @@ final Map<String, String> enUs = {
   "lbl_teachers": "TEACHERS",
 
   // ORGANIZATION Screen
-  "lbl_college_name": "COLLEGE NAME", "lbl_location": "LOCATION",
+  "lbl_college_name": "COLLEGE NAME",
+  "lbl_location": "LOCATION",
+  "lbl_org_email": "ORGANIZATION EMAIL",
+  "lbl_city": "CITY",
+
   "lbl_other_details": "OTHER DETAILS",
 
   // VERIFICATION Screen
@@ -41,6 +45,10 @@ final Map<String, String> enUs = {
   // Common String
   "lbl_college": "COLLEGE", "lbl_name": "NAME",
   "lbl_username": "USERNAME",
+  "lbl_experience": "EXPERIENCE",
+  "lbl_achievement": "ACHIEVEMENT",
+  "lbl_qualification": "QUALIFICATION",
+
   "lbl_organization": "ORGANIZATION",
 
 // Network Error String

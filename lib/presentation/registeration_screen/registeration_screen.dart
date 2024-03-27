@@ -133,12 +133,6 @@ class RegisterationScreen extends StatelessWidget {
                                   SizedBox(height: 60.v),
                                   CustomElevatedButton(
                                       onPressed: () {
-                                        // Get a reference to the RegisterationBloc using BlocProvider
-                                        // final bloc =
-                                        //     BlocProvider.of<RegisterationBloc>(
-                                        //         context);
-
-                                        // Get email and password from controllers
                                         final email =
                                             bloc.state.emailController!.text;
                                         final password =

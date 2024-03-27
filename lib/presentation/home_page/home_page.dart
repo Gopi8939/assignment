@@ -28,25 +28,25 @@ class HomePage extends StatelessWidget {
       return SafeArea(
           child: Scaffold(
               body: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Container(
-                    width: double.maxFinite,
-                    decoration: AppDecoration.fillOnPrimary,
-                    child: Column(children: [
-                      SizedBox(height: 37.v),
-                      _buildSixtyOne(context),
-                      SizedBox(height: 70.v),
-                      Padding(
-                          padding: EdgeInsets.only(left: 23.h, right: 60.h),
-                          child: _buildTwenty(context)),
-                      SizedBox(height: 30.v),
-                      Padding(
-                          padding: EdgeInsets.only(left: 23.h, right: 60.h),
-                          child: _buildTwenty(context)),
-                      SizedBox(height: 30.v),
-                      _buildSixtyThree(context)
-                    ])),
-              )));
+        scrollDirection: Axis.vertical,
+        child: Container(
+            width: double.maxFinite,
+            decoration: AppDecoration.fillOnPrimary,
+            child: Column(children: [
+              SizedBox(height: 37.v),
+              _buildSixtyOne(context),
+              SizedBox(height: 70.v),
+              Padding(
+                  padding: EdgeInsets.only(left: 23.h, right: 60.h),
+                  child: _buildTwenty(context)),
+              SizedBox(height: 30.v),
+              Padding(
+                  padding: EdgeInsets.only(left: 23.h, right: 60.h),
+                  child: _buildTwenty(context)),
+              SizedBox(height: 30.v),
+              _buildSixtyThree(context)
+            ])),
+      )));
     });
   }
 

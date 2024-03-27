@@ -17,3 +17,13 @@ class RecommendationInitialEvent extends RecommendationEvent {
   @override
   List<Object?> get props => [];
 }
+
+class RecommendationFllowButton extends RecommendationEvent {
+  final int userId;
+  final int followerId;
+
+  RecommendationFllowButton({required this.userId, required this.followerId});
+
+  @override
+  List<Object?> get props => [userId, followerId];
+}
